@@ -9,20 +9,21 @@ mongo = PyMongo(app)
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return render_template("Index/index.html")
 
 @app.route("/map")
 def map():
-    records = mongo.db.death_record.find()
-    return render_template("maps.html", records=records)
+    records = mongo.db.death_record.find_one()
+    print(records)
+    return render_template("Map/maps.html", records=records)
 
 @app.route("/visual")
 def visuals():
-    return render_template("visuals.html")
+    return render_template("Visuals/visuals.html")
 
 @app.route("/resources")
 def resource():
-    return render_template("resources.html")
+    return render_template("Resources/resources.html")
     
 
 

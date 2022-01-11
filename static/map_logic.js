@@ -1,5 +1,10 @@
 //bring flask variable to javascript
-fetch('/api').then((res)=>{ console.log(res)})
+fetch('/api').then(function (response) {
+    return response.json();
+}).then(function (text) {
+    console.log('GET response:');
+    console.log(text);
+});
 
 // Create a map object.
 var myMap = L.map("map", {

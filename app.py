@@ -1,7 +1,8 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request
 from flask.json import JSONEncoder
 from flask_pymongo import PyMongo
 import json
+from bson import json_util
 
 app = Flask(__name__)
 
@@ -16,7 +17,8 @@ def index():
 @app.route("/map")
 def map():
     records = mongo.db.death_record.find_one()
-    return render_template("maps.html", records=records)
+    print(records)
+    return render_template("maps.html")
 
 @app.route("/visual")
 def visuals():
@@ -26,10 +28,15 @@ def visuals():
 def resource():
     return render_template("resources.html")
 
-@app.route("/api")
+@app.route("/api", methods=['GET', 'POST'])
 def api():
     data=mongo.db.death_record.find_one()
-    return JSONEncoder().encode(data)
+
+    if request.method == 'GET':  
+        return json.loads(json_util.dumps(data))
+    if request.method == 'POST':
+        print(request.get_json())
+        return 'Success', 200
 
 
 if __name__ == "__main__":

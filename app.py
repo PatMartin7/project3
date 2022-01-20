@@ -1,6 +1,7 @@
 from flask import Flask, render_template, jsonify, request
 from flask.json import JSONEncoder
 from flask_pymongo import PyMongo
+from flask_sqlalchemy import SQLAlchemy
 import json
 from bson import json_util
 
@@ -9,6 +10,8 @@ app = Flask(__name__)
 app.config["MONGO_URI"] = "mongodb://localhost:27017/Troubles_DB"
 mongo = PyMongo(app)
 
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:Nikki789$@localhost/McKeown'
+mcsql = SQLAlchemy(app)
 
 @app.route("/")
 def index():
@@ -34,6 +37,10 @@ def api():
     if request.method == 'POST':
         print(request.get_json())
         return 'Success', 200
+
+@app.route("/apisql")
+def apisql():
+    return render_template("chart.html")
 
 
 if __name__ == "__main__":

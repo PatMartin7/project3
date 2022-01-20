@@ -31,7 +31,6 @@ def resource():
 @app.route("/api", methods=['GET', 'POST'])
 def api():
     data=mongo.db.death_record.find_one()
-
     if request.method == 'GET':  
         return json.loads(json_util.dumps(data))
     if request.method == 'POST':

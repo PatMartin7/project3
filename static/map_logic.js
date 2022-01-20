@@ -4,10 +4,11 @@ var myMap = L.map("map", {
     zoom: 11
   });
   
-// Adding the tile layer
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  // Adding the tile layer
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
   }).addTo(myMap);
+  
 
 // //bring flask variable to javascript
 // const dataresult = fetch("/api").then((response) => response.json())

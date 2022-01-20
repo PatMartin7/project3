@@ -19,8 +19,6 @@ def index():
 
 @app.route("/map")
 def map():
-    records = mongo.db.death_record.find_one()
-    print(records)
     return render_template("maps.html")
 
 @app.route("/visual")

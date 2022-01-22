@@ -3,40 +3,156 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 <body>
 
-<canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+<canvas id="myChart1" style="width:100%;max-width:800px"></canvas>
+<canvas id="myChart2" style="width:100%;max-width:600px"></canvas>
+<canvas id="myChart3" style="width:100%;max-width:1000px"></canvas>
+<canvas id="myChart4" style="width:100%;max-width:1000px"></canvas>
 
 <script>
 var xValues = [];
-var yValues = [];
-generateData("x * 2 + 7", 0, 10, 0.5);
-
-new Chart("myChart", {
-  type: "line",
+var yValues = []; 
+fetch('/api2')
+  .then(function (response) {
+      return response.json();
+  }).then(function (text) {
+      console.log('GET response:');
+      for (let i = 0; i < text.length; i++) {
+        xValues.push(text[i][0]),
+        yValues.push(text[i][1])
+      }
+  var barColors = ["red", "green","blue","orange","brown","red", "green","blue","orange","brown","red", "green","blue","orange","brown","red", "green","blue","orange","brown","red", "green","blue","orange","brown","red", "green","blue","orange","brown","red", "green","blue","orange","brown","red", "green","blue","orange","brown"];
+  new Chart("myChart1", {
+  type: "bar",
   data: {
     labels: xValues,
     datasets: [{
-      fill: false,
-      pointRadius: 1,
-      borderColor: "rgba(255,0,0,0.5)",
+      backgroundColor: barColors,
       data: yValues
     }]
-  },    
+  },
   options: {
     legend: {display: false},
     title: {
       display: true,
-      text: "y = x * 2 + 7",
-      fontSize: 16
+      text: "Total Deaths by Year"
     }
   }
-});
-function generateData(value, i1, i2, step = 1) {
-  for (let x = i1; x <= i2; x += step) {
-    yValues.push(eval(value));
-    xValues.push(x);
-  }
-}
+})
+
+
+
+
+
+  });
+
+
 </script>
+
+<script>
+var xValues2 = [];
+var yValues2 = []; 
+fetch('/api3')
+  .then(function (response) {
+      return response.json();
+  }).then(function (text) {
+      console.log('GET response:');
+      for (let i = 0; i < text.length; i++) {
+        xValues2.push(text[i][0]),
+        yValues2.push(text[i][1])
+      }
+  var barColors = ["red", "green","blue","orange","brown","red", "green","blue","orange","brown","red", "green","blue","orange","brown","red", "green","blue","orange","brown","red", "green","blue","orange","brown","red", "green","blue","orange","brown","red", "green","blue","orange","brown","red", "green","blue","orange","brown"];
+  new Chart("myChart2", {
+  type: "pie",
+  data: {
+    labels: xValues2,
+    datasets: [{
+      backgroundColor: barColors,
+      data: yValues2
+    }]
+  },
+  options: {
+    legend: {display: false},
+    title: {
+      display: true,
+      text: "Total Deaths by Gender"
+    }
+  }
+})
+  });
+
+
+</script>
+
+<script>
+var xValues3 = [];
+var yValues3 = []; 
+fetch('/api4')
+  .then(function (response) {
+      return response.json();
+  }).then(function (text) {
+      console.log('GET response:');
+      for (let i = 0; i < text.length; i++) {
+        xValues3.push(text[i][0]),
+        yValues3.push(text[i][1])
+      }
+  var barColors = ["red", "green","blue","orange","brown","red", "green","blue","orange","brown","red", "green","blue","orange","brown","red", "green","blue","orange","brown","red", "green","blue","orange","brown","red", "green","blue","orange","brown","red", "green","blue","orange","brown","red", "green","blue","orange","brown"];
+  new Chart("myChart3", {
+  type: "bar",
+  data: {
+    labels: xValues3,
+    datasets: [{
+      backgroundColor: barColors,
+      data: yValues3
+    }]
+  },
+  options: {
+    legend: {display: false},
+    title: {
+      display: true,
+      text: "Total Deaths by Agency"
+    }
+  }
+})
+  });
+
+
+</script>
+
+<script>
+var xValues4 = [];
+var yValues4 = []; 
+fetch('/api5')
+  .then(function (response) {
+      return response.json();
+  }).then(function (text) {
+      console.log('GET response:');
+      for (let i = 0; i < text.length; i++) {
+        xValues4.push(text[i][0]),
+        yValues4.push(text[i][1])
+      }
+  var barColors = ["red", "green","blue","orange","brown","red", "green","blue","orange","brown","red", "green","blue","orange","brown","red", "green","blue","orange","brown","red", "green","blue","orange","brown","red", "green","blue","orange","brown","red", "green","blue","orange","brown","red", "green","blue","orange","brown"];
+  new Chart("myChart4", {
+  type: "bar",
+  data: {
+    labels: xValues4,
+    datasets: [{
+      backgroundColor: barColors,
+      data: yValues4
+    }]
+  },
+  options: {
+    legend: {display: false},
+    title: {
+      display: true,
+      text: "Total Deaths by Context"
+    }
+  }
+})
+  });
+
+
+</script>
+
 
 </body>
 </html>

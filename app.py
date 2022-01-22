@@ -17,10 +17,6 @@ mcsql = SQLAlchemy(app)
 def index():
     return render_template("index.html")
 
-@app.route("/map")
-def map():
-    return render_template("maps.html")
-
 @app.route("/visual")
 def visuals():
     return render_template("visuals.html")
@@ -31,7 +27,8 @@ def resource():
 
 @app.route("/api", methods=['GET', 'POST'])
 def api():
-    data=mongo.db.death_record.find_one()
+    somestuff=[doc for doc in mongo.db.death_record.find()]
+    data = {"Mongo": somestuff}
     if request.method == 'GET':  
         return json.loads(json_util.dumps(data))
     if request.method == 'POST':
